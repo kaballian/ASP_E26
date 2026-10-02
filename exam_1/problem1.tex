@@ -1,0 +1,66 @@
+\section{Problem 1}
+\textit{Consider a causal system given by the following system function}
+\[H(z) = 1 + 3.5z^{-1}+1.5z^{-2}\]
+\textit{And assume that the causal systtem is used as a model for a communcation channel that will
+distort signals passing through it.}
+
+\subsection{1.}
+\textit{Design an equalizer that can mitigate the distortion}
+The system function is being described as causal, meaning that it cannot depend on future
+inputs, only on previous inputs $x[n], x[n-1], x[n-2], ...$. In non-minimum-phase systems, the
+distortion from systems $H(z)$ can be \textit{undone} by cascading an equalizer, or filter, with 
+the system function, such that when multiplied by its inverse, its effects will be undone.
+$H(z)H_{inv}(z) = 1$. %side 254 i bogen
+From the given system function, the zeros and poles can be extracted. A stable and causal 
+system, should have poles inside the unit circle, but the zeros does not need to be.
+To find out what kind of equalizer we should construct, we can firstly analyze our system to
+find these.
+
+\[H(z) = 1 + 3.5z^{-1}+1.5z^{-2} \Rightarrow 
+H(z)z^2 = z^2 + 3.5z^1 + 1.5 \Rightarrow
+H(z) = \frac{z^2 + 3.5z^1 + 1.5}{z^2}\]\\
+rewritten as \[\frac{(z+3)(z+0.5)}{z^2}\]\\
+yielding zeroes in: $z=-3$,$z=-0.5$.
+Here one zero lies within the unit circle, while the other does not.
+This is not a problem for the original system.
+
+Our equalizer should ideally be an inverse of the original system, such that 
+\[H_{inv} = \frac{1}{H(z)} = \frac{A(z)}{B(z)}\] such that \[H(z) = \frac{B(z)}{A(z)}\]
+however because of this, the zeroes from the original becomes the poles, which now resides outside
+the unit circle making it unstable. Therefore we must decompose this system into a minimum-phase system
+and an allpass system. 
+\[H(z) = H_{min}(z)H_{ap}(z)\]
+taking the deduced system function from earlier, this can be rewritten into an expression, 
+that can be made into a system function that will be composed of our minimum-phase and all-pass systems
+\[H(z) = \frac{(z+3)(z+0.5)}{z^2} \Rightarrow
+\frac{z+0.5}{z} \frac{z+3}{z} \Rightarrow
+(1+0.5z^{-1})(1+3z^{-1})\]
+In this case, we have a zero $z=-3$ outside the unit circuit, and $z =\frac{1}{a}, |a|<1 \Rightarrow a = -\frac{1}{3}$
+The composition ca be written as:
+\[
+H(z) = H_1(z)
+\underbrace{(1-az^{-1})}_{\text{minimum-phase factor}}
+\underbrace{
+\frac{z^{-1}-a^*}{1-az^{-1}}
+}_{\text{All-pass factor}}
+\]
+\[\Downarrow\]
+\[
+H(z) = 3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})
+\frac{z^{-1}+\frac{1}{3}}{1+\frac{1}{3}z^{-1}}
+\]
+Where $H_1(z] = (1+0.5z^{-1})$ and the additional factor of 3, added to the front of $H_1(z)$ 
+is the scale factor, which the magnitude of a.
+
+cleaning up the expressiong yields:
+\[H(z)= 3(1+0.5z^{-1})(z^{-1}+\frac{1}{3})\]
+All-pass filters affect phase, but not magnitude, therefore we can construct our filter assume
+\[H_{eq=\frac{1}{H_{min}}} \Rightarrow \frac{1}{3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})}\]
+%husk scale factor på 3 a = 1/3, 
+
+% OUTPUT = H(Z) * INPUT -> OUTPUT/INPUT = H(Z)
+% ZEROS (OUTPUT)    - IF THIS GOES TO -> 0, THE ENTIRE THIS SHUTS DOWN
+% ______________
+% POLES (INPUT)     - IF THIS GOES TO -> 0, THE ENTIRE THINGS BLOWS UP TO INFINITY 
