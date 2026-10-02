@@ -55,12 +55,70 @@ is the scale factor, which the magnitude of a.
 
 cleaning up the expressiong yields:
 \[H(z)= 3(1+0.5z^{-1})(z^{-1}+\frac{1}{3})\]
-All-pass filters affect phase, but not magnitude, therefore we can construct our filter assume
-\[H_{eq=\frac{1}{H_{min}}} \Rightarrow \frac{1}{3(1+0.5z^{-1})
-(1+\frac{1}{3}z^{-1})}\]
+All-pass filters affect phase, but not magnitude, therefore we can construct our filter as
+\[H_{eq}(z)=\frac{1}{H_{min}} = \frac{1}{3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})}\]\\
+
+As mentioned ealier, there is a relationship between the input system, the minimum phase and the all pass function.
+Since we have the inverse of the minimum phase, we can multiply the equalizer with the input system and then get the 
+all pass function.
+\[
+H(z)H_{eq}(z) = 3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})
+\frac{z^{-1}+\frac{1}{3}}{1+\frac{1}{3}z^{-1}} 
+\cdot
+\frac{1}{3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})}
+\]
+\[\Downarrow\]
+\[
+= \frac{3(1+0.5z^{-1})(z^{-1}+\frac{1}{3})}{3(1+0.5z^{-1})
+(1+\frac{1}{3}z^{-1})}
+\]
+\[\Downarrow\]
+\[=\frac{(z^{-1}+\frac{1}{3})}{(1+\frac{1}{3}z^{-1})} = H_{ap}(z)\]
+And this expression is equal to our allpass system.
 %husk scale factor på 3 a = 1/3, 
 
 % OUTPUT = H(Z) * INPUT -> OUTPUT/INPUT = H(Z)
 % ZEROS (OUTPUT)    - IF THIS GOES TO -> 0, THE ENTIRE THIS SHUTS DOWN
 % ______________
 % POLES (INPUT)     - IF THIS GOES TO -> 0, THE ENTIRE THINGS BLOWS UP TO INFINITY 
+
+The magnitude- and phasereponse is shown below
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{mag_response.png}
+
+        \vspace{2mm}
+
+        \includegraphics[width=0.7\linewidth]{phase_response.png}
+    \end{minipage}
+    \caption{magnitude and phasereponse of the deduced all-pass filter}
+    \label{fig:comparison}
+\end{figure}
+\subsection{2.}
+\textit{Make a time-domain simulation of the system and the equalizer using a test signal of your choice.
+Explain the choice of test signal and procedures .. analyze the performance of the equalizer}
+
+A good test signal for the system, with the equalizer, would be a squarewave signal
+as it contains its fundamental frequency, as well as, essentially, infititely many odd harmonics thereof.
+We'll select a signal with frequency of $f=2kHz$ and a sampling rate $f_s=48kHz$
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.7\linewidth]{test_signal.png}
+    \caption{2kHz testsignal, passed through, first the communcation channel and the through the 
+    equalizer. Note the slight overshoot of the signal edges from the rise and fall times.}
+\end{figure}
+
+\subsection{3.}
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.7\linewidth]{test_noise.png}
+    \caption{white gaussian noise added after the communcation channel, in this case the noise
+    is 20dB SNR. Before the eq, the signal waveform can easily be made out, however after the eq,
+    some sharpness has been retained in the rise and falling edges, however distortion is still present.}
+\end{figure}
