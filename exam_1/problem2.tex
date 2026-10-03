@@ -1,0 +1,72 @@
+\section{Problem 2}
+\textit{Consider the random process $x[n]$ created as $x[n] = 4w[n] - 2w[n-3]$ Where
+w[n] is unit variance white Gaussian noise.}
+
+\subsection{1.}
+\textit{Compute an analytic expression for the autocorrelation $r_{xx}[l]$}\\
+The definition of the autocorrelation, how a signal correlates to itself, takes the 
+form of 
+\[r_{xx}[l] = \textbf{E}\{x[n]x[n-l]\} \]
+Inserting the given expression of $x[n]$ into the autocorrelation definition yields a rather length expression:
+\[
+r_{xx}[l] =
+\textbf{E}\{(4w[n] - 2w[n-3])\cdot(4w[n-l] - 2w[n-l-3])\}
+\]
+expanding
+\[
+r_{xx}[l] = 
+\textbf{E}\{
+16w[n]w[n-l]
+- 8w[n]w[n-l-3]
+- 8w[n-3]w[n-l]
++ 4w[n-3]w[n-l-3]
+\}
+\]
+Since $w[n]$ is described as being zero unit variance white gaussian noise, we 
+also make the assumption that the noise is zero-mean, thus, there is no positive or negative
+bias. Unit variance meaning that the variance $\sigma^2 = 1$. Because of this, we
+can write the definition of the autocorrelation of white noise
+\[
+\textbf{E}\{x[n]x[n-l]\} = \sigma^2\delta[l]
+\]
+we can then apply this rule to every expectation and move the coefficients to each term, and making
+makes the difference between each sample index equal to zero. essentially we want the delta function
+to become zero and it follows the rule:
+\[
+\delta[l] = \begin{cases}
+    \sigma^2, & \text{if } l = 0\\
+    0, & \text{if } l \neq 0
+\end{cases}
+\]
+\[\text{first term:} \]
+\[16\textbf{E}\{w[n]w[n-l]\} = \delta[l] \Rightarrow 16\delta[l]\]
+\[\text{second term: } n = n - l - 3 \Rightarrow l = -3 \Rightarrow \delta[l+3]\]
+\[-8\textbf{E}\{w[n]w[n-l-3]\} = \delta[l]\Rightarrow -8\delta[l+3]\]
+\[\text{third term: } n - 3 = n - l \Rightarrow l = 3\]
+\[-8\textbf{E}\{w[n-3]w[n-l]\} = \delta[l] \Rightarrow -8\delta[l-3]\]
+\[\text{fourth term: } n - 3 = n - l - 3 \Rightarrow l = 0 \]
+\[4\textbf{E}\{w[n-3]w[n-l-3]\} = 4\delta[l]\]
+Combining the terms:
+\[r_{xx}[l] = 20\delta[l]-8\delta[l+3]-8\delta[l-3]\]
+This leads to the autocorrelation:
+\[
+r_{xx}[l] = \begin{cases}
+    20, & l = 0\\
+    -8, & l = \pm3\\
+    0, & \text{otherwise} 
+\end{cases}
+\]
+
+
+\subsection{2.}
+\textit{Plot the power spectral density of the random process. What can be learned from the plot?}
+The \textit{PSD} of a stationary random signal, is the fourier transform of the 
+autocorrelation, which shows the distribution of power as a function of frequency.
+It can be calculated using:
+\[S_{xx}(e^{j\omega}) = \sum_{l=-\infty}^{\infty}r_{xx}[l]e^{-jl\omega}\]
+If this is applied to $r_{xx}$ from before, we can see that we only have conditions
+for $l$ in 3 cases, all other cases the summation term becomes zero. Thus it can
+be expressed as:
+\[
+S_{xx}(e^{j\omega}) = r_{xx}[-3]e^{-j(-3)\omega} + r_{xx}[-0]e^{-j0\omega} + r_{xx}[3]e^{-j3\omega}
+\]
