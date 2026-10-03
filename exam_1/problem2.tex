@@ -70,3 +70,38 @@ be expressed as:
 \[
 S_{xx}(e^{j\omega}) = r_{xx}[-3]e^{-j(-3)\omega} + r_{xx}[-0]e^{-j0\omega} + r_{xx}[3]e^{-j3\omega}
 \]
+\[\Downarrow\]
+\[= 20e^{j0\omega} - 8e^{-j(-3)\omega} - 8e^{-j3\omega}\]
+\[\Downarrow\]
+\[= 20 - 8e^{j3\omega} - 8e^{-j3\omega}\]
+this can be rewritten using euler identities relating euler complex functions to sinusoids.
+\[= 20 - 8(e^{j3\omega} + e^{-j3\omega})\]
+\[\Downarrow\]
+\[= 20 - 8(\cos(3\omega) + j\sin(3\omega) + \cos(3\omega) - j\sin(3\omega)) \Rightarrow 20 - 8(2cos(3\omega)) \Rightarrow 20 - 16\cos(3\omega)\]
+which can be plotted:
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.7\textwidth]{opg_2_PSD.png}
+\end{figure}
+
+\subsection{3.}
+\textit{Assume $x[n]$ is filtered through a FIR filter with $H(z) = 5+z^{-1}$}\\
+\textit{Compute the analytical expressions for $r_{yx}[l]$ and $r_{yy}[l]$}
+
+Firstly, were given the filter in the z-domain, where the filter essentially tells us \textit{"take the current samples
+and multiply by 5 and add it to the previous input sample"} this can be constructed as 
+\[y[n] = 5x[n] + x[n-1]\]
+Is then possible to our definition of $x[n]$ into this filter and for the second term shift all n-samples by 1
+\[y[n] = 5 \{4w[n]-2w[n-3]\} + \{4w[n-1]-2w[n-4]\} \Rightarrow 20w[n] + 4w[n-1] - 10w[n-3]-2w[n-4]\] 
+To find $r_{yx}$, which is the cross-correlation, between y and x, meaning how much
+two signals are alike when shifted relative to eachother, has the definition:
+\[y_{yx}[l] = \textbf{E}\{y[n]x[n-l]\}\]
+It is then possible to substitute the filter function into the 
+ALTERNATIVT
+Firstly, were given the filter in the z-domain, where the filter essentially tells us \textit{"take the current samples
+and multiply by 5 and add it to the previous input sample"} which has the impulse response as
+\[h[l] = 5\delta[l] + \delta[l-1]\]
+It is then possible to use the formula described in (13.100)
+\[r_{yx}[l] = h[l] * r_{xx}[l]\]
+where $*$ is the mathematical operation \textit{convolution}.
+
