@@ -34,7 +34,7 @@ To implement the linear interpolation scheme, we use the formula for the general
 In our case we only have $x[0] = 2$ and $x[1] = 1$, so only m = 0 and 1 contributes.
 And uses the kernel 
 \[
-g_{lin} = \begin{cases}
+g_{lin}[n] = \begin{cases}
     1 - \frac{|n|}{l}, & -l < n < l\\
     0, & \text{otherwise}
 \end{cases}\]
@@ -64,11 +64,13 @@ Our original sequence was x[n], and when linearly interpolated, becomes:
 x_I[0] = 2,
 \qquad
 x_I[1] = \frac{5}{3},
-\qquad
+\]
+\[
 x_I[2] = \frac{4}{3},
 \qquad
 x_I[3] = 1
-\qquad
+\]
+\[
 x_I[4] = \frac{2}{3},
 \qquad
 x_I[5] = \frac{1}{3},
@@ -80,6 +82,25 @@ x_I[6] = 0
     \includegraphics[width=0.7\textwidth]{p3_linear.png}
 \end{figure}
 
+So $x_I[1]$ and$x_I[2]$ in linear interpolation can be written as 
+\[
+x_I[1] = 
+\sum_{m=0}^{1} x[m]\cdot g_{lin}[1-m\cdot 3] 
+= 
+x[0]g_{lin}[1-(0*3)] + 
+x[1]g_{lin}[1-(1*3)] 
+= 
+2(\frac{2}{3})+1(\frac{1}{3})=\frac{5}{3}
+\]
+\[
+x_I[2] = 
+\sum_{m=0}^{1} x[m]\cdot g_{lin}[2-m\cdot 3] = 
+x[0]g_{lin}[2-(0*3)] + 
+x[1]g_{lin}[2-(1*3)] 
+= 
+2(\frac{1}{3})+1(\frac{2}{3})=\frac{4}{3}
+\]
+
 As for the propsed interpolation kernel $g[n] \Rightarrow g_p[n]$, renamed for convienience.
 Starting from the same interpolation formula:
 \[x_p[n] = 2g_p[n]+g_p[n-3]\]
@@ -88,22 +109,19 @@ Starting from the same interpolation formula:
 x_p[-1] = 2g_p[-1]+g_p[(-1)-3] = 2(-1)+0 = -2 ,
 \qquad
 x_p[0] = 2g_p[0]+g_p[0-3] = 2(3) + 0 = 6,
-\qquad
+\]
+\[
 x_p[1] = 2g_p[1]+g_p[1-3] = 2(-1)+0 = -2,
 \qquad
-\]
-
-\[
 x_p[2] = 2g_p[2]+g_p[2-3] = 2(0) + (-1) = -1,
-\qquad
+\]
+\[
 x_p[3] = 2g_p[3]+g_p[3-3] = 2(0) + 3 = 5,
 \qquad
-x_p[4] = 2g_p[4]+g_p[4-3] = 2(0) + (-1) = -1,
+x_p[4] = 2g_p[4]+g_p[4-3] = 2(0) + (-1) = -1
 \]
 \[
-\qquad
 x_p[5] = 2g_p[5]+g_p[5-3] = 0 + 0 = 0 ,
-\qquad
 \]
 
 leading to:
@@ -126,8 +144,16 @@ x_I[5] = 0,
     \centering
     \includegraphics[width=0.7\textwidth]{p3_proposed_inter.png}
 \end{figure}
-\subsection{3.}
 
+And $x_I[1]$ and $x_I[2]$ witht the proposed kernel, written explicitly:
+\[x_I[1] = \sum_{m=0}^{1} x[m] g_p[1-3m] = x[0] g_p[1-3(0)] + x[1] g_p[1-3(1)] =2(-1)+1(0) = -2 \]
+\[x_I[2] = \sum_{m=0}^{1} x[m] g_p[2-3m] = x[0] g_p[2-3(0)] + x[1] g_p[2-3(1)] = x[0]g_p[2] + x[1]g_p[-1] =2(0)+1(-1) = -1 \]
+
+\subsection{3.}
+The two interpolations, behave quite differently. The linear interpolation, obviously looks just like a linear function, whereas the 
+proposed almost looks like a \textit{sinc} function. The proposed one, does not preserve any of the original values, whereas the linear does. As 
+in, it gains them quite drasticly and also attenuates quite hard. So it could be said that the proposed does not perform a proper interpolation
+as it does not preserve the original samples in magnitude, only in signal shape.
 
 % \[
 % \delta[l] = \begin{cases}
