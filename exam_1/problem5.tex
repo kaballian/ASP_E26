@@ -1,0 +1,50 @@
+\section{problem 5}
+\textit{Consider a two-channel filter bank where it is intended to operate it as a quadrature mirror filter 
+with $H(z) = 1+\frac{1}{2}Z^{-1}$ }
+
+\subsection{1.}
+\textit{Are $H_0(z)$ and $H_1(z)$ power complementary?}\\
+For two filters to be power complementary, they must satify the condition that
+\[|H_0(e^{j\omega})|^2 + |H_1(e^{j\omega})|^2 = 1\], however this also applies to filters that takes the form of $H(z)$
+here the condition is:
+\[H(z)H(z^{-1})+H(-z)H(-z)^{-1} = 1\]
+In our case $H_0(z) = H(z) = 1+\frac{1}{2}Z^{-1}$
+as for $H(z^{-1})$ this we can replace Z with $Z^{-1} \Rightarrow H(Z^{-1}) = 1+\frac{1}{2}(Z^{-1})^{-1} = 1+\frac{1}{2}Z$ 
+$H(-z)$ and $H(-z^{-1})$ is contructed as:
+\[H(-z) = 1 + \frac{1}{2}(-Z)^{-1}\Rightarrow 1-\frac{1}{2}Z^{-1}\]
+\[H(-z)^{-1} = 1 + \frac{1}{2}(-Z^{-1})^{-1} \Rightarrow 1 -\frac{1}{2}Z\]
+Put all the Substitutions together yields:
+\[H(z)H(z^{-1})+H(-z)H(-z)^{-1} = (1+\frac{1}{2}Z^{-1})(1+\frac{1}{2}Z)+(1-\frac{1}{2}Z^{-1})(1 -\frac{1}{2}Z)\]
+\[\Downarrow\]
+\[=(1+\frac{1}{2}Z + \frac{1}{2}Z^{-1}+\frac{1}{4}) + (1 - \frac{1}{2}Z - \frac{1}{2}Z^{-1}+\frac{1}{4})\]
+\[\frac{5}{4}+\frac{5}{4} = \frac{10}{4} = \frac{5}{2}\]
+
+In other words
+$\frac{5}{2} \neq 1$ therefore $H_0(z)$ and $H_1(z)$ are not power complementary
+%side 752 i bogen
+
+\subsection{2.}
+\textit{Will the choice of H(z) lead to an aliasing-free filter bank?}\\
+The purpose of the quadrature mirror filter is to provide cancellation of output aliasing
+, but the reconstruction propety is also approximate. 
+The system function of a QMF is given by.
+\[T(z) = H^2(z) - H^2(-z)\]
+from ealier we know those two functions:
+\[(1+\frac{1}{2}Z^{-1})^2 - (1-\frac{1}{2}Z^{-1})^2\]
+\[\Downarrow\]
+\[(1+\frac{1}{2}Z^{-1})(1+\frac{1}{2}Z^{-1}) - (1-\frac{1}{2}Z^{-1})(1-\frac{1}{2}Z^{-1})\]
+\[\Downarrow\]
+\[(1 + Z^{-1} + \frac{1}{4}z^{-2}) - (1-Z^{-1}+\frac{1}{4}z^{-2})\]
+\[\Downarrow\]
+\[1 + Z^{-1} + \frac{1}{4}z^{-2} - 1+Z^{-1}-\frac{1}{4}z^{-2}\]
+\[\Downarrow\]
+\[T(z) = 2Z^{-1}\]
+This expression is a gain of 2 and a delay of 1 sample. This means that the choice of $H(z)$ will lead to an
+alias-free filter bank.
+
+
+\subsection{3.}
+\textit{Discuss the choice of H(z) for a quadrature mirror filter bank.}
+The idea behind the QMF was to implement it as a low-pass filter and then implement
+it using the filter banks, designed specifically to combat aliasing. If H(z) is limited to 
+have a linear-phase then it would have a symmetric impulse response.
