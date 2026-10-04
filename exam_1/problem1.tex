@@ -86,7 +86,7 @@ And this expression is equal to our allpass system.
 % POLES (INPUT)     - IF THIS GOES TO -> 0, THE ENTIRE THINGS BLOWS UP TO INFINITY 
 
 The magnitude- and phasereponse is shown below
-\begin{figure}[htbp]
+\begin{figure}[!htb]
     \centering
     \begin{minipage}{0.9\textwidth}
         \centering
@@ -96,9 +96,10 @@ The magnitude- and phasereponse is shown below
 
         \includegraphics[width=0.7\linewidth]{phase_response.png}
     \end{minipage}
-    \caption{magnitude and phasereponse of the deduced all-pass filter}
+    \caption{magnitude and phase reponse of the deduced all-pass filter}
     \label{fig:comparison}
 \end{figure}
+\clearpage
 \subsection{2.}
 \textit{Make a time-domain simulation of the system and the equalizer using a test signal of your choice.
 Explain the choice of test signal and procedures .. analyze the performance of the equalizer}
@@ -113,8 +114,9 @@ We'll select a signal with frequency of $f=2kHz$ and a sampling rate $f_s=48kHz$
     \caption{2kHz testsignal, passed through, first the communcation channel and the through the 
     equalizer. Note the slight overshoot of the signal edges from the rise and fall times.}
 \end{figure}
-
+\clearpage
 \subsection{3.}
+\textit{How are the results affect by the additive noise?}
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.7\linewidth]{test_noise.png}

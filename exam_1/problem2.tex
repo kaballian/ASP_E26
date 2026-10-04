@@ -22,16 +22,16 @@ r_{xx}[l] =
 + 4w[n-3]w[n-l-3]
 \}
 \]
-Since $w[n]$ is described as being zero unit variance white gaussian noise, we 
-also make the assumption that the noise is zero-mean, thus, there is no positive or negative
-bias. Unit variance meaning that the variance $\sigma^2 = 1$. Because of this, we
+Since $w[n]$ is described as being unit variance white gaussian noise, we 
+also make the assumption that the noise is zero-mean.
+Unit variance meaning that the variance $\sigma^2 = 1$. Because of this, we
 can write the definition of the autocorrelation of white noise
 \[
 \textbf{E}\{x[n]x[n-l]\} = \sigma^2\delta[l]
 \]
 we can then apply this rule to every expectation and move the coefficients to each term, and making
-makes the difference between each sample index equal to zero. essentially we want the delta function
-to become zero and it follows the rule:
+makes the difference between each sample index equal to zero. essentially we want the argument of the 
+delta function to become zero and it follows the rule:
 \[
 \delta[l] = \begin{cases}
     \sigma^2, & \text{if } l = 0\\
@@ -40,11 +40,14 @@ to become zero and it follows the rule:
 \]
 \[\text{first term:} \]
 \[16\textbf{E}\{w[n]w[n-l]\} = \delta[l] \Rightarrow 16\delta[l]\]
-\[\text{second term: } n = n - l - 3 \Rightarrow l = -3 \Rightarrow \delta[l+3]\]
+\[\text{second term:}\]
+\[ n = n - l - 3 \Rightarrow l = -3 \Rightarrow \delta[l+3]\]
 \[-8\textbf{E}\{w[n]w[n-l-3]\} = \delta[l]\Rightarrow -8\delta[l+3]\]
-\[\text{third term: } n - 3 = n - l \Rightarrow l = 3\]
+\[\text{third term:}\]
+\[ n - 3 = n - l \Rightarrow l = 3\]
 \[-8\textbf{E}\{w[n-3]w[n-l]\} = \delta[l] \Rightarrow -8\delta[l-3]\]
-\[\text{fourth term: } n - 3 = n - l - 3 \Rightarrow l = 0 \]
+\[\text{fourth term:}\]
+\[ n - 3 = n - l - 3 \Rightarrow l = 0 \]
 \[4\textbf{E}\{w[n-3]w[n-l-3]\} = 4\delta[l]\]
 Combining the terms:
 \[r_{xx}[l] = 20\delta[l]-8\delta[l+3]-8\delta[l-3]\]
@@ -59,7 +62,7 @@ r_{xx}[l] = \begin{cases}
 
 
 \subsection{2.}
-\textit{Plot the power spectral density of the random process. What can be learned from the plot?}
+\textit{Plot the power spectral density of the random process. What can be learned from the plot?}\\
 The \textit{PSD} of a stationary random signal, is the fourier transform of the 
 autocorrelation, which shows the distribution of power as a function of frequency.
 It can be calculated using:
