@@ -1,1 +1,122 @@
 \section{Theoretical background}
+Contrary to regular filtering, the designer targets a specific frequency or bandwidth, 
+placing zeroes and poles on the unit-circle to \textit{approximate}, a desired result, or 
+atleast get somewhat close to something acceptable.\\
+
+In adaptive filtering, we're more concerned about the system as an input and how we implement
+an algorithm to force the error to be zero. In this lab journal the overall system we'll be examining
+will take the form of:
+
+\begin{figure}[htpb]
+    \centering
+    \begin{tikzpicture}[
+        >=Latex,
+        thick,
+        block/.style={
+            draw,
+            rectangle,
+            minimum width=2.5cm,
+            minimum height=1.2cm,
+            align=center
+        },
+        sum/.style={
+            draw,
+            circle,
+            minimum size=0.8cm,
+            inner sep=0pt
+        }
+    ]
+    \node[block] (system) at (4,2) {system};
+    \node[block] (fir) at (4,0) {FIR filter};
+    \node[block] (adaptive) at (4,-2)
+        {adaptive\\algorithm};
+    
+  % Error summation junction
+    \node[sum] (sum) at (7,2) {$+$};
+
+    % Input summation junction
+    \node[sum] (sum_1) at (0,2) {$+$};
+
+    % Noise input from the left
+    \draw[->] (-1.5,2) --
+        node[above] {$v[k]$} (sum_1.west);
+
+    % Sinusoidal input from below
+    \draw[->] (0,0.8) --
+        node[right] {$s[k]$} (sum_1.south);
+
+    % Combined input
+    \draw[->] (sum_1.east) --
+        node[above] {$x[k]$} (system.west);
+    \draw[->] (1.5,2) |- (fir.west);
+    \draw[->] (1.5,0) |- (adaptive.west);
+
+    \draw[->] (system.east) --
+        node[above] {$d[k]$} (sum.west);
+
+    % Branch combined input to FIR and adaptive algorithm
+    \draw[->] (1.5,2) |- (fir.west);
+    \draw[->] (1.5,0) |- (adaptive.west);
+
+    % System output to error summation
+    \draw[->] (system.east) --
+        node[above] {$d[k]$} (sum.west);
+
+    % FIR output to error summation
+    \draw[->] (fir.east) -| (7,1.6);
+    \node at (6.1,0.25) {$y[k]$};
+    \node at (7.35,1.35) {$-$};
+
+    % Error output
+    \draw[->] (sum.east) --
+        (9,2) node[above left]
+        {$e[k]=d[k]-y[k]$};
+
+    % Error feedback to adaptive algorithm
+    \draw[->] (9,2) |- (adaptive.east);
+
+    % Adaptive algorithm updates FIR coefficients
+    \draw[->] (adaptive.north) -- (fir.south);
+
+
+    \end{tikzpicture}
+    \caption{Adaptive FIR filter structure.}
+    \label{fig:adaptive_filter}
+\end{figure}
+
+Where $x[k]$ will be some randomly generated noise, with a zero-mean, unit variance, passing through a system
+summed together with a sinusoid $s[k]$, for testing purposes, to experimentally see how the system responds
+to both noise and a signal combined.\\
+
+The simple LMS filter works by taking the output of the system, as the desired output $d[k]$ and then
+subtracting $y[k]$, which is the output of the FIR filter, governed by a vector of weights $w[k]$. The
+The LMS algorithm will then try to force the error $e[k] = d[k] - y[k] \approx 0$ by tuning the weights 
+in descrete steps.
+
+The weight vector and the x-vector, which holds old samples :
+\[
+\mathbf{W}[k] = 
+\begin{bmatrix}
+    w_0[k]\\
+    w_1[k]\\
+    ...\\
+    w_N-1[k]\\
+\end{bmatrix},
+\qquad
+\mathbf{X}[k] = 
+\begin{bmatrix}
+    x[k]\\
+    x[k-1]\\
+    ...\\
+    x[k-N+1]\\
+\end{bmatrix}
+\]
+
+The complete algorithm for computing the coefficiens for the vector:
+\[\mathbf{W}(k+1) = \mathbf{W}[k] + 2\mu e[k]\mathbf{x}[k]\]
+The factor $\mu$ is factor that gives some control of how aggressize the filter should act, as it a scalar
+that is multiplied onto the weights and the old samples. The idea of the algorithm is then, that each iteration
+that it runs, the weights of the filter are multipled with the signal, which affects how $y[k+1]$ samples will behave,
+this affects the error, and it repeats. Each iteration the weights gets updates aswell, so that they are
+applied with a different value at the next iteration. 
+
