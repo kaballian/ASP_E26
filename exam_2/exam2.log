@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.19)  5 NOV 2026 21:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.19)  9 NOV 2026 19:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -994,7 +994,7 @@ Package pdftex.def Info: logo.png  used on input line 4.
  [1
 
 {C:/Users/alext/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./logo.png>]) (introduction.tex) (theoretical.tex) (numerical_experiment.tex) (result_analysis.tex) (conclusion.tex) [2]
-runsystem(latexminted cleantemp  --timestamp 20261105213729 497C7C1A74076FB4623A61A0855589E6)...disabled (restricted).
+runsystem(latexminted cleantemp  --timestamp 20261109190910 497C7C1A74076FB4623A61A0855589E6)...disabled (restricted).
 
  (exam2.aux)
  ***********
@@ -1006,17 +1006,17 @@ Package logreq Info: Writing requests to 'exam2.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60630 strings out of 474486
- 1610480 string characters out of 5743754
+ 60632 strings out of 474486
+ 1610501 string characters out of 5743754
  2815227 words of memory out of 5000000
- 82307 multiletter control sequences out of 15000+600000
- 562169 words of font info for 50 fonts, out of 8000000 for 9000
+ 82308 multiletter control sequences out of 15000+600000
+ 562515 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  117i,8n,121p,767b,1732s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on exam2.pdf (2 pages, 72217 bytes).
+<C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on exam2.pdf (2 pages, 97590 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 35 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
