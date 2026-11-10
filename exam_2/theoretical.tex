@@ -93,7 +93,7 @@ subtracting $y[k]$, which is the output of the FIR filter, governed by a vector 
 The LMS algorithm will then try to force the error $e[k] = d[k] - y[k] \approx 0$ by tuning the weights 
 in descrete steps.
 
-The weight vector and the x-vector, which holds old samples :
+The vector $\mathbf{W}[k]$ hold the coefficients and the vector $\mathbf{X}[k]$ holds old samples :
 \[
 \mathbf{W}[k] = 
 \begin{bmatrix}
