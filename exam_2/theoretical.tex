@@ -88,6 +88,8 @@ Where $x[k]$ will be some randomly generated noise, with a zero-mean, unit varia
 summed together with a sinusoid $s[k]$, for testing purposes, to experimentally see how the system responds
 to both noise and a signal combined.\\
 
+In this example, the unidentified system will be $d[k]= 0.5x[k] + 0.25x[k-1] -0.3x[k-2]$\\
+
 The simple LMS filter works by taking the output of the system, as the desired output $d[k]$ and then
 subtracting $y[k]$, which is the output of the FIR filter, governed by a vector of weights $w[k]$. The
 The LMS algorithm will then try to force the error $e[k] = d[k] - y[k] \approx 0$ by tuning the weights 

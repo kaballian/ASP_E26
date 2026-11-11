@@ -1,5 +1,122 @@
 \section{Results}
 \subsection{Analysis}
+\subsubsection{LMS}
+Starting with the output of the regular LMS filter, it can be seen on figure:\ref{fig:comp_LMS_M3}, 
+where the size of the $\mu$ is very small and how it compares to an increase in size in an order og magitude
+twice. Towards the end of the 2000 samples, $y[k]$ seems to almost be equal to that of $d[k]$ meaning that
+the error, which is the difference of two would become zero, this would essentailly mean that the filter
+that converged on the weights of the unidentified system. However as the value of $\mu$ increases, the speed 
+at which this happens increases, quite dramatically.\\
+
+Taking a look at the graph for the weights, the semi dashed
+lines, belonging to $\mu = 0.005$, the weights have almost converged after 500 samples, which is a fourth of 
+the total amount of samples. And again, an increases in this speed, or decrease in time, can be see if the
+value is even larger. Looking at the equation for the update of the weights, $\mu$ is 
+essentailly just scaling how much we want the product of the error and the old samples,
+to affect the future weights. As this goes on for every iteration, it becomes intuitive how it
+slows the entire process down.
+\\
+
+We can consider an example where we let every input sample be $x[k] = 1$ and we have only the first term in our
+unidentified system, difference equation $d[k]= 0.5x[k]$, and the filter is initialized to be $w[0] = 0$, we want 
+to find the $w_{ideal} = 0.5$ such that the error is forced to 0.
+A entire iteration with $\mu=0.05$ of the LMS becomes:
+\[d[k] = 0.5(1) = 0.5\]
+\[y[0] = w[k]x[k] = 0(1) = 0\]
+\[e[k] = 0.5 - 0 = 0.5\]
+\[w[k+1] = w[k] + 2\mu e(k)x(k) = 0 + 2(0.05)(0.5)(1) = 0.05 \]
+
+
+% \begin{table}[htbp]
+%     \centering
+%     \caption{comparison of LMS weight update}
+%     \label{tab:lms_stepsize}
+%     \begin{tabular}{ccc}
+%         \toprule
+%         $k$ & $\mu = 0.05$ & $\mu = 0.4$ \\
+%         \midrule
+%         0  & 0.0000 & 0.0000 \\
+%         1  & 0.0500 & 0.4000 \\
+%         2  & 0.0950 & 0.4800 \\
+%         3  & 0.1355 & 0.4960 \\
+%         4  & 0.1720 & 0.4992 \\
+%         5  & 0.2048 & 0.4998 \\
+%         6  & 0.2341 & 0.4999 \\
+%         7  & 0.2609 & 0.4999 \\
+%         8  & 0.2848 & 0.4999 \\
+%         9  & 0.3063 & 0.5000 \\
+%         10 & 0.3257 & 0.5000 \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+\begin{figure}[H]
+    \centering
+    %table: left
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \captionof{table}{comparison of LMS weight update}
+        \label{tab:lms_stepsize}
+        \begin{tabular}{ccc}
+            \toprule
+            $k$ & $\mu = 0.05$ & $\mu = 0.4$ \\
+            \midrule
+            0  & 0.0000 & 0.0000 \\
+            1  & 0.0500 & 0.4000 \\
+            2  & 0.0950 & 0.4800 \\
+            3  & 0.1355 & 0.4960 \\
+            4  & 0.1720 & 0.4992 \\
+            5  & 0.2048 & 0.4998 \\
+            6  & 0.2341 & 0.4999 \\
+            7  & 0.2609 & 0.4999 \\
+            8  & 0.2848 & 0.4999 \\
+            9  & 0.3063 & 0.5000 \\
+            10 & 0.3257 & 0.5000 \\
+            \bottomrule
+        \end{tabular}
+    \end{minipage}
+    \hfill
+    %right, graph
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_simple_convergence.png}
+        \caption{Simple converge}
+        \label{fig:lms_convergence_simple}
+    \end{minipage}
+    
+\end{figure}
+
+What table \ref{tab:lms_stepsize} shows is that with the large step size, we're already 
+80\% of the way towards the convergence after the first iteration, but getting closer
+to the ideal weight become harder. In this particular case, the convergence is nicely approaching the
+ideal coefficients, this is due to the constant input of 1. However if the system gets a sudden impulses
+added to the input, then it is easy to see that the larger value of $\mu$ wont \textit{dampen} the larger step input,
+but larger values of $\mu$ also comes with some drawbacks that will be expanded upon in the discussion section.
+ 
+
+
+% irregularity as much as the smaller value.
+
+
 \subsection{Discussion}
+As alluded to in the LMS analysis section, larger values of $\mu$ is not necessary a good thing.
+If too a large is selected, the resulting product of the input and the error is essentailly gained
+by the value, if this value $\mu \le 1$ it is easy to see that, this will cause the resulting calculations
+to start spiralling out of control. In the simple example given ealier, an equation for the behaviour of the
+oscillations can be derived. 
+\[w[k+1] = w[k] + 2\mu e[k]x[k]\]
+In this case, the single tab, the desired signal can be described as: $d[k] = \alpha x[k] $ and 
+filter $y[k] = w[k]x[k]$ and the error $e[k] = d[k] - y[k]$ substituting $d[k]$ and $y[k]$:
+\[e[k]\Rightarrow \alpha x[k] - w[k] x[k] = (\alpha - w[k])x[k]\]
+Substituting this into the update equation yields:
+\[w[k+1] = w[k] +2\mu(\alpha - w[k])x^2[k]\]
+Manipulating the equation and in this case x[k] = 1:
+\[w[k+1] = w[k] + 2\mu\alpha - 2\mu w[k] \]
+\[w[k+1] = w[k] - 2\mu w[k] + 2\mu \alpha \]
+\[w[k+1] = (1-2\mu)w[k] + 2\mu\alpha\]
+
+
+%discuss calculating the maximum step size
+
+
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth

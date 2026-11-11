@@ -4,7 +4,68 @@ Looking at the equations for the LMS filter, we're given some handles to tune th
 namely $\mu$, $M$ the amount of filter taps and $N$ how long the algorithm will run.
 
 For the initial tests, we'll keep the amount of filter tabs fixed to $M=3$, and we'll instead 
-vary the step size by a factor of 1000, and keep the test running for a 1000 samples.
+vary the step size by a factor of 1000, and keep the test running for a 2000 samples. This is an
+estimate to have enought samples to atleast at higher values for $\mu$ that the filter will converge.
+
+The next experiment is increasing the filter taps, where $M = [3,5,10]$. This is done to observe
+if increasing the filter tabs, beyond the amount of poles present in the unidentified system, has 
+any influence on either convergence speed and accuracy.
+\begin{figure}[H]
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_M_3.png}
+        \caption{LMS, M=3}
+        \label{fig:LMS_M_3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_weights_M_3.png}
+        \caption{LMS, weights, M=3}
+        \label{fig:LMS_M_3_W}
+    \end{subfigure}
+    \caption{Comparison of sizes of $\mu$ for M=3}
+    \label{fig:comp_LMS_M3}
+\end{figure}
+\begin{figure}[H]
+    %row 2
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_M_5.png}
+        \caption{LMS, M=5}
+        \label{fig:LMS_M_5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_weights_M_5.png}
+        \caption{LMS, weights, M=5}
+        \label{fig:LMS_M_5_W}
+    \end{subfigure}
+    \caption{Comparison of sizes of $\mu$ for M=5}
+    \label{fig:comp_LMS_M5}
+\end{figure}
+\begin{figure}[H]
+
+    %row 3
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_M_10.png}
+        \caption{LMS, M=10}
+        \label{fig:LMS_M_10}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_weights_M_10.png}
+        \caption{LMS, weights, M=10}
+        \label{fig:LMS_M_10_W}
+    \end{subfigure}
+    \caption{Comparison of sizes of $\mu$ for M=10}
+    \label{fig:comp_LMS_M10}
+\end{figure}
+
 
 
 

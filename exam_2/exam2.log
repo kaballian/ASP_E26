@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.19)  10 NOV 2026 21:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.10.19)  12 NOV 2026 00:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -891,20 +891,20 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (exam2.aux)
 \openout1 = `exam2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -965,7 +965,7 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 )) (C:\Users\alext\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 31.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 32.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
@@ -985,8 +985,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'exam2.bbl' not found.
 
 No file exam2.bbl.
-Package biblatex Info: Reference section=0 on input line 31.
-Package biblatex Info: Reference segment=0 on input line 31.
+Package biblatex Info: Reference section=0 on input line 32.
+Package biblatex Info: Reference segment=0 on input line 32.
 (forside.tex
 <logo.png, id=4, 803.0pt x 168.63pt>
 File: logo.png Graphic file (type png)
@@ -1005,8 +1005,59 @@ Underfull \hbox (badness 10000) in paragraph at lines 87--90
 
  []
 
-[2]) (numerical_experiment.tex) (result_analysis.tex) (conclusion.tex) [3]
-runsystem(latexminted cleantemp  --timestamp 20261110214038 497C7C1A74076FB4623A61A0855589E6)...disabled (restricted).
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
+[2]) (numerical_experiment.tex
+<graphs/lms_experiment_1_M_3.png, id=24, 859.2903pt x 642.4803pt>
+File: graphs/lms_experiment_1_M_3.png Graphic file (type png)
+<use graphs/lms_experiment_1_M_3.png>
+Package pdftex.def Info: graphs/lms_experiment_1_M_3.png  used on input line 16.
+(pdftex.def)             Requested size: 247.05878pt x 184.71655pt.
+<graphs/lms_experiment_1_weights_M_3.png, id=25, 859.2903pt x 426.393pt>
+File: graphs/lms_experiment_1_weights_M_3.png Graphic file (type png)
+<use graphs/lms_experiment_1_weights_M_3.png>
+Package pdftex.def Info: graphs/lms_experiment_1_weights_M_3.png  used on input line 23.
+(pdftex.def)             Requested size: 247.05878pt x 122.59029pt.
+<graphs/lms_experiment_1_M_5.png, id=26, 859.2903pt x 642.4803pt>
+File: graphs/lms_experiment_1_M_5.png Graphic file (type png)
+<use graphs/lms_experiment_1_M_5.png>
+Package pdftex.def Info: graphs/lms_experiment_1_M_5.png  used on input line 34.
+(pdftex.def)             Requested size: 247.05878pt x 184.71655pt.
+<graphs/lms_experiment_1_weights_M_5.png, id=27, 859.2903pt x 426.393pt>
+File: graphs/lms_experiment_1_weights_M_5.png Graphic file (type png)
+<use graphs/lms_experiment_1_weights_M_5.png>
+Package pdftex.def Info: graphs/lms_experiment_1_weights_M_5.png  used on input line 41.
+(pdftex.def)             Requested size: 247.05878pt x 122.59029pt.
+<graphs/lms_experiment_1_M_10.png, id=28, 859.2903pt x 642.4803pt>
+File: graphs/lms_experiment_1_M_10.png Graphic file (type png)
+<use graphs/lms_experiment_1_M_10.png>
+Package pdftex.def Info: graphs/lms_experiment_1_M_10.png  used on input line 53.
+(pdftex.def)             Requested size: 247.05878pt x 184.71655pt.
+<graphs/lms_experiment_1_weights_M_10.png, id=29, 859.2903pt x 426.393pt>
+File: graphs/lms_experiment_1_weights_M_10.png Graphic file (type png)
+<use graphs/lms_experiment_1_weights_M_10.png>
+Package pdftex.def Info: graphs/lms_experiment_1_weights_M_10.png  used on input line 61.
+(pdftex.def)             Requested size: 247.05878pt x 122.59029pt.
+ [3 <./graphs/lms_experiment_1_M_3.png> <./graphs/lms_experiment_1_weights_M_3.png>]) (result_analysis.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--10
+
+ []
+
+[4 <./graphs/lms_experiment_1_M_5.png> <./graphs/lms_experiment_1_weights_M_5.png> <./graphs/lms_experiment_1_M_10.png> <./graphs/lms_experiment_1_weights_M_10.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 11--19
+
+ []
+
+<graphs/lms_simple_convergence.png, id=43, 642.4803pt x 354.123pt>
+File: graphs/lms_simple_convergence.png Graphic file (type png)
+<use graphs/lms_simple_convergence.png>
+Package pdftex.def Info: graphs/lms_simple_convergence.png  used on input line 81.
+(pdftex.def)             Requested size: 247.05878pt x 136.17296pt.
+[5 <./graphs/lms_simple_convergence.png>]) (conclusion.tex) [6]
+runsystem(latexminted cleantemp  --timestamp 20261112000733 497C7C1A74076FB4623A61A0855589E6)...disabled (restricted).
 
  (exam2.aux)
  ***********
@@ -1018,17 +1069,17 @@ Package logreq Info: Writing requests to 'exam2.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 60788 strings out of 474486
- 1614162 string characters out of 5743754
- 2828243 words of memory out of 5000000
- 82457 multiletter control sequences out of 15000+600000
- 563896 words of font info for 56 fonts, out of 8000000 for 9000
+ 60870 strings out of 474486
+ 1616834 string characters out of 5743754
+ 2828485 words of memory out of 5000000
+ 82538 multiletter control sequences out of 15000+600000
+ 564195 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,8n,121p,761b,1732s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on exam2.pdf (3 pages, 161202 bytes).
+ 117i,11n,121p,761b,1732s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alext/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on exam2.pdf (6 pages, 1493669 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
+ 96 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
