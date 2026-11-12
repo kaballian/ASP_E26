@@ -71,3 +71,95 @@ any influence on either convergence speed and accuracy.
 
 % \subsection{leaky LMS experimentation}
 \subsection{variable step-size experimentation}
+The experiment with the variable step-size implementation, will be conducted 
+in a slightly similar manner, however, in the regular LMS, we are \textit{almost} free to 
+choose our values of $\mu$, however in the case for the variable step-size, some bounds are
+defined, as qouted [INDSÆT REFERENCE TIL BOGEN] \textit{"The minimum bound, which may be imposed on the variable
+step-size parameters $\mu_i(n)'s$, can be as low as zero. However in actual practice, a positive bound is usually used"}.
+Therefore stability is ensured if $trace(\mathbf{\mu}[n]\mathbf{R}) < \frac{1}{3}$. Which is the linear sum 
+of the diagonal of the autocorrelation matrix and $\mu$ vector:
+\[\mu_0[k] R_{00} + \mu_1[k] R_{11} + \dots + \mu_{M-1}[k] R_{M-1, M-1} < \frac{1}{3}\]
+For white noise the autocorrelation matrix is: 
+\[\mathbf{R} = \sigma^2_x \mathbf{I}\]
+Because the unidentified system actually is 3 terms, $M=3$
+This creates the constrains:
+\[\mu_i \le \mu_{max}\]
+Where the largest sum of values becomes:
+\[\sum_{i=0}^{M-1} \le M\mu_{max}\]
+This can rearranged:
+\[\mu_{max} < \frac{1}{3M\sigma^2_x}\]
+Since we already established the variance for the noise:
+\[\mu_{max} < \frac{1}{3M}\]
+And as already mentioned, in this case $M=3$, leads To
+\[\mu_{max} = \frac{1}{3\cdot3} = \frac{1}{9} = 0.1111\]
+\\
+Instead changes to $\rho$ can be applied, thus our test cases will be varying values of this factor in small increments
+of 0.0001, 0.001 and 0.005.
+\\
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_1_conv.png}
+        \caption{Filter weight convergence, $\rho=0.0001$}    
+        \label{fig:VVSLMS_1_conv}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_1_adapt.png}
+        \caption{filter step size adaptation, $\rho=0.0001$}
+        \label{fig:VVSLMS_1_adapt}
+    \end{subfigure}
+    \vspace{0.3cm}
+    \begin{subfigure}{0.65\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_1_output.png}
+        \caption{VVSLMS output, $\rho=0.0001$}
+    \end{subfigure}
+    \caption{Results for running VVS LMS with 2000 samples}
+    \label{fig:VVSLMS_1_results}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_2_conv.png}
+        \caption{Filter weight convergence, $\rho=0.001$} 
+        \label{fig:VVSLMS_2_conv}   
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_2_adapt.png}
+        \caption{filter step size adaptation, $\rho=0.001$}
+        \label{fig:VVSLMS_2_adapt}
+    \end{subfigure}
+    \vspace{0.3cm}
+    \begin{subfigure}{0.65\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_2_output.png}
+        \caption{VVSLMS output, $\rho=0.001$}
+    \end{subfigure}
+    \caption{Results for running VVS LMS with 2000 samples}
+    \label{fig:VVSLMS_2_results}
+\end{figure}
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_3_conv.png}
+        \caption{Filter weight convergence, $\rho=0.005$}    
+        \label{fig:VVSLMS_3_conv}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_3_adapt.png}
+        \caption{filter step size adaptation, $\rho=0.005$}
+        \label{fig:VVSLMS_3_adapt}
+    \end{subfigure}
+    \vspace{0.3cm}
+    \begin{subfigure}{0.65\textwidth}
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_3_output.png}
+        \caption{VVSLMS output, $\rho=0.005$}
+    \end{subfigure}
+    \caption{Results for running VVS LMS with 2000 samples}
+    \label{fig:VVSLMS_3_results}
+\end{figure}

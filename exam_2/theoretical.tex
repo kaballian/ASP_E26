@@ -35,23 +35,15 @@ will take the form of:
   % Error summation junction
     \node[sum] (sum) at (7,2) {$+$};
 
-    % Input summation junction
-    \node[sum] (sum_1) at (0,2) {$+$};
+    % Main input line to system
+    \draw[->] (0,2) -- node[above] {$x[k]$} (system.west);
 
-    % Noise input from the left
-    \draw[->] (-1.5,2) --
-        node[above] {$v[k]$} (sum_1.west);
+    % Branch downward from main input line
+    \draw (1.5,2) -- (1.5,-2);
 
-    % Sinusoidal input from below
-    \draw[->] (0,0.8) --
-        node[right] {$s[k]$} (sum_1.south);
-
-    % Combined input
-    \draw[->] (sum_1.east) --
-        node[above] {$x[k]$} (system.west);
-    \draw[->] (1.5,2) |- (fir.west);
-    \draw[->] (1.5,0) |- (adaptive.west);
-
+    % Branches to FIR and adaptive algorithm
+    \draw[->] (1.5,0) -- (fir.west);
+    \draw[->] (1.5,-2) -- (adaptive.west);
     \draw[->] (system.east) --
         node[above] {$d[k]$} (sum.west);
 
@@ -129,4 +121,13 @@ As briefly mentioned in the LMS section, the factor $\mu$ is a deciding factor
 in filter performance for an LMS filter. It determines the speed of convergence and accuracy.
 In the variable step-size algorithm each filter tab has an independent.
 It follows the form:
-\[w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i]\]  
+\[w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
+\qquad
+\textit{for} \qquad i = 0, 1, \dots, N-1\]  
+The interesting part of this implementation is the gradient term, which
+is an intermediate calculation for the update of the $\mu$ value.
+\[g_i[n] = e[n]x[n-i] \qquad \textit{and} \qquad u_i[n] = u_i[n-1] + \rho sign \left[g_i[i]\right]sign\left[lg_i[n-1]\right]\]
+It is then up to the individual use case to determine a $\mu_{min}$ and $\mu_{max}$
+This essentailly calculates a gradient for direction, positive or negative, that the $\mu$ should move, granting
+the ability to increase or decrease the value. Another tuneable factor is $\rho$ which essentially dictates how much 
+the step-size itself changes, as it sits as an index independt factor, just as $\mu$ did in the regular LMS.

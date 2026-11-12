@@ -18,7 +18,8 @@ slows the entire process down.
 \\
 
 We can consider an example where we let every input sample be $x[k] = 1$ and we have only the first term in our
-unidentified system, difference equation $d[k]= 0.5x[k]$, and the filter is initialized to be $w[0] = 0$, we want 
+unidentified system with the difference equation $d[k]= 0.5x[k]$, and the filter is initialized to be $w[0] = 0$. We want 
+
 to find the $w_{ideal} = 0.5$ such that the error is forced to 0.
 A entire iteration with $\mu=0.05$ of the LMS becomes:
 \[d[k] = 0.5(1) = 0.5\]
@@ -79,13 +80,13 @@ A entire iteration with $\mu=0.05$ of the LMS becomes:
     \begin{minipage}[c]{0.48\textwidth}
         \centering
         \includegraphics[width=\linewidth]{graphs/lms_simple_convergence.png}
-        \caption{Simple converge}
+        \caption{Weight convergence of }
         \label{fig:lms_convergence_simple}
     \end{minipage}
     
 \end{figure}
 
-What table \ref{tab:lms_stepsize} shows is that with the large step size, we're already 
+What table \ref{tab:lms_stepsize} shows is that with the large step size of $\mu=0.4$, we're already 
 80\% of the way towards the convergence after the first iteration, but getting closer
 to the ideal weight become harder. In this particular case, the convergence is nicely approaching the
 ideal coefficients, this is due to the constant input of 1. However if the system gets a sudden impulses
@@ -95,6 +96,22 @@ but larger values of $\mu$ also comes with some drawbacks that will be expanded 
 
 
 % irregularity as much as the smaller value.
+
+\subsection{VVS LMS}
+Look at the results from the experiment on figure: \ref{fig:VVSLMS_1_results}, \ref{fig:VVSLMS_2_results} and \ref{fig:VVSLMS_3_results}. 
+Its difficult to see any difference between the variable step-size and the regular implementation of the LMS. However, one is to look at the
+graph for the weight convergence, this might a clearly indication of how they differ in this scenario. The most
+direction comparison is between figure \ref{fig:LMS_M_3_W}, and any of the weight graphs 
+\ref{fig:VVSLMS_1_conv}, \ref{fig:VVSLMS_2_conv} and \ref{fig:VVSLMS_3_conv}. These graphs
+tracks the changes in the filter coefficients and shows how the filter adapts to the unknown system.
+The difference here is that all implementations of the variable step-size version seems steeper, this
+gives an indication that the filter reacts faster, however the evolution of the weights seems more sporadic than 
+the regular LMS implementation. This phenomenon will be expanded upon the discussion section.
+\\
+Looking at the evolution of the step-size adaptation for each of the experiments on figure: 
+\ref{fig:VVSLMS_1_adapt}, \ref{fig:VVSLMS_2_adapt} and \ref{fig:VVSLMS_3_adapt}. This shows how the value
+of $\mu$ increases over time, important to note here is the f
+
 
 
 \subsection{Discussion}
@@ -109,26 +126,15 @@ To observe how well the regular LMS performs in our experiments, we've taken a l
 result in the error converging to zero. This can be represented as the mean square error instead, and when
 this is done over multiple runs of the filter. (INDSÆT REFERENCE TO WIKI: MEAN\_SQUARED\_ERROR)
 \[MSE = \frac{1}{n}\sum_{i=1}^{n}e^2_i[k]\]
-Letting this run at, say a 1000 runs, we produce a new expression for the estimate of the expected 
+Letting this complete a 1000 runs, we produce a new expression for the estimate of the expected 
 squared error at each sample interval. This results in the following graph:
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{graphs/LMS_mse.png}
     \caption{The mean squared error of the LMS, with vary sizes of $\mu$}
     \label{fig:LMS_EMS}
 \end{figure}
-% In the simple example given ealier, an equation for the behaviour of the
-% oscillations can be derived. 
-% \[w[k+1] = w[k] + 2\mu e[k]x[k]\]
-% In this case, the single tab, the desired signal can be described as: $d[k] = \alpha x[k] $ and 
-% filter $y[k] = w[k]x[k]$ and the error $e[k] = d[k] - y[k]$ substituting $d[k]$ and $y[k]$:
-% \[e[k]\Rightarrow \alpha x[k] - w[k] x[k] = (\alpha - w[k])x[k]\]
-% Substituting this into the update equation yields:
-% \[w[k+1] = w[k] +2\mu(\alpha - w[k])x^2[k]\]
-% Manipulating the equation and in this case x[k] = 1:
-% \[w[k+1] = w[k] + 2\mu\alpha - 2\mu w[k] \]
-% \[w[k+1] = w[k] - 2\mu w[k] + 2\mu \alpha \]
-% \[w[k+1] = (1-2\mu)w[k] + 2\mu\alpha\]
+
 
 On figure \ref{fig:LMS_EMS} it is possible to see the decreasing nature of the error,
 it seems smooth, however this averages over 1000 runs, this does not mean that the filter
@@ -142,3 +148,22 @@ ability, in this case to converge towards 0, meaning the filter has approximated
 
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth
+
+
+%discuss VVS LMS stability
+
+
+
+
+% In the simple example given ealier, an equation for the behaviour of the
+% oscillations can be derived. 
+% \[w[k+1] = w[k] + 2\mu e[k]x[k]\]
+% In this case, the single tab, the desired signal can be described as: $d[k] = \alpha x[k] $ and 
+% filter $y[k] = w[k]x[k]$ and the error $e[k] = d[k] - y[k]$ substituting $d[k]$ and $y[k]$:
+% \[e[k]\Rightarrow \alpha x[k] - w[k] x[k] = (\alpha - w[k])x[k]\]
+% Substituting this into the update equation yields:
+% \[w[k+1] = w[k] +2\mu(\alpha - w[k])x^2[k]\]
+% Manipulating the equation and in this case x[k] = 1:
+% \[w[k+1] = w[k] + 2\mu\alpha - 2\mu w[k] \]
+% \[w[k+1] = w[k] - 2\mu w[k] + 2\mu \alpha \]
+% \[w[k+1] = (1-2\mu)w[k] + 2\mu\alpha\]
