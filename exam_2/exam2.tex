@@ -16,10 +16,11 @@
 \usepackage{subcaption}
 \usepackage[
 backend=biber,
-style=numeric,
+style=ieee,
 sorting=none
 ]{biblatex}
 
+\addbibresource{references.bib}
 
 %curtom macro
 \newcommand{\VperRootHz}[1]{\frac{\mathrm{#1V}}{\sqrt{\mathrm{Hz}}}}  %use $VperRootHz{n}$, $VperRootHz{\mu}$ etc
@@ -38,6 +39,9 @@ sorting=none
 \input{numerical_experiment.tex}
 \input{result_analysis.tex}
 \input{conclusion.tex}
+
+\newpage
+\printbibliography[title={references}]
 
 \end{document}
 

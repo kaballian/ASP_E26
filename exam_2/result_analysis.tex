@@ -123,11 +123,11 @@ If too a large is selected, the resulting product of the input and the error is 
 by the value, if this value $\mu \le 1$ it is easy to see that, this will cause the resulting calculations
 to start spiralling out of control. An optimum value for $\mu$ can be derived, however as long as:
 \[0 < \mu < \frac{1}{\lambda_{max}}\]
-This is equation (6.17) from the adaptive filter book, [INDSÆT REFERENCE TIL BOGEN]
-"where the $\lambda_{max}$ is the maximum eigenvalue of $\mathbf{R}$", where $\mathbf{R}$ is the autocorrelation matrix.\\
+This is equation (6.17) from the adaptive filter book,\cite[p.143]{ASPbook}
+"where the $\lambda_{max}$ is the maximum eigenvalue of $\mathbf{R}$"\cite[p.143]{ASPbook}, where $\mathbf{R}$ is the autocorrelation matrix.\\
 To observe how well the regular LMS performs in our experiments, we've taken a look at much $y[k]$ approches $d[k]$ which would
 result in the error converging to zero. This can be represented as the mean square error instead, and when
-this is done over multiple runs of the filter. (INDSÆT REFERENCE TO WIKI: MEAN\_SQUARED\_ERROR)
+this is done over multiple runs of the filter\cite{wiki_mse}.
 \[MSE = \frac{1}{n}\sum_{i=1}^{n}e^2_i[k]\]
 Letting this complete a 1000 runs, we produce a new expression for the estimate of the expected 
 squared error at each sample interval. This results in the following graph:
@@ -228,10 +228,15 @@ As can be seen on the figure: \ref{fig:VSSLMS_MSE_1}, \ref{fig:VSSLMS_MSE_2} amd
 the mean square error approaches zero at the end of the samples, and with the increase in step size,
 or rather, $\rho$ how hard, the algorithm react to the step size, the filter acts faster. It is 
 also expected to be able to converge with these settings, as the filter itself is $M=3$ and the
-unidentified system is also has 3 coefficients.
+unidentified system is also has 3 coefficients.\\
 
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth
+On a practical note, implementing these algorithms on cheap hardware such as microcontrollers
+might be an attractive prospective. Since the algorithms are only multiplication and additions,
+with some sneaky pointer arithmatic, it should be fairly resource inexpensive. The limitations 
+might come from actual floating point performance, as the weights and especially the step factors 
+can become very small, thus it might introduce some interesting settling behaviour due to rounding errors.
 
 
 
