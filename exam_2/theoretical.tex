@@ -121,12 +121,24 @@ As briefly mentioned in the LMS section, the factor $\mu$ is a deciding factor
 in filter performance for an LMS filter. It determines the speed of convergence and accuracy.
 In the variable step-size algorithm each filter tab has an independent.
 It follows the form:
-\[w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
+\begin{equation}
+w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
 \qquad
-\textit{for} \qquad i = 0, 1, \dots, N-1\]  
+\textit{for} \qquad i = 0, 1, \dots, N-1
+\label{VSS_LMS_W}
+\end{equation}
+  
 The interesting part of this implementation is the gradient term, which
 is an intermediate calculation for the update of the $\mu$ value.
-\[g_i[n] = e[n]x[n-i] \qquad \textit{and} \qquad u_i[n] = u_i[n-1] + \rho sign \left[g_i[i]\right]sign\left[lg_i[n-1]\right]\]
+\begin{equation}
+g_i[n] = e[n]x[n-i] \qquad  \qquad 
+\label{VSS_LMS_g}
+\end{equation}
+\textit{and}
+\begin{equation}
+u_i[n] = u_i[n-1] + \rho sign \left[g_i[i]\right]sign\left[lg_i[n-1]\right]
+\label{VSS_LMS_mu_update}
+\end{equation}
 It is then up to the individual use case to determine a $\mu_{min}$ and $\mu_{max}$
 This essentailly calculates a gradient for direction, positive or negative, that the $\mu$ should move, granting
 the ability to increase or decrease the value. Another tuneable factor is $\rho$ which essentially dictates how much 

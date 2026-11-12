@@ -8,8 +8,7 @@ the error, which is the difference of two would become zero, this would essentai
 that converged on the weights of the unidentified system. However as the value of $\mu$ increases, the speed 
 at which this happens increases, quite dramatically.\\
 
-Taking a look at the graph for the weights, the semi dashed
-lines, belonging to $\mu = 0.005$, the weights have almost converged after 500 samples, which is a fourth of 
+Taking a look at the graph for the weights, the semi dashed lines, belonging to $\mu = 0.005$, the weights have almost converged after 500 samples, which is a fourth of 
 the total amount of samples. And again, an increases in this speed, or decrease in time, can be see if the
 value is even larger. Looking at the equation for the update of the weights, $\mu$ is 
 essentailly just scaling how much we want the product of the error and the old samples,
@@ -98,19 +97,23 @@ but larger values of $\mu$ also comes with some drawbacks that will be expanded 
 % irregularity as much as the smaller value.
 
 \subsection{VVS LMS}
-Look at the results from the experiment on figure: \ref{fig:VVSLMS_1_results}, \ref{fig:VVSLMS_2_results} and \ref{fig:VVSLMS_3_results}. 
+Looking at the results from the experiment on figure: \ref{fig:VVSLMS_1_results}, \ref{fig:VVSLMS_2_results} and \ref{fig:VVSLMS_3_results}. 
 Its difficult to see any difference between the variable step-size and the regular implementation of the LMS. However, one is to look at the
 graph for the weight convergence, this might a clearly indication of how they differ in this scenario. The most
 direction comparison is between figure \ref{fig:LMS_M_3_W}, and any of the weight graphs 
-\ref{fig:VVSLMS_1_conv}, \ref{fig:VVSLMS_2_conv} and \ref{fig:VVSLMS_3_conv}. These graphs
+\ref{fig:VVSLMS_1_conv}, \ref{fig:VVSLMS_2_conv} and \ref{fig:VVSLMS_3_conv}.\\
+These graphs
 tracks the changes in the filter coefficients and shows how the filter adapts to the unknown system.
 The difference here is that all implementations of the variable step-size version seems steeper, this
 gives an indication that the filter reacts faster, however the evolution of the weights seems more sporadic than 
 the regular LMS implementation. This phenomenon will be expanded upon the discussion section.
 \\
+
 Looking at the evolution of the step-size adaptation for each of the experiments on figure: 
 \ref{fig:VVSLMS_1_adapt}, \ref{fig:VVSLMS_2_adapt} and \ref{fig:VVSLMS_3_adapt}. This shows how the value
-of $\mu$ increases over time, important to note here is the f
+of $\mu$ increases over time, as mentioned earlier, there is a minimum and maximum bound for $\mu$ 
+in the VVS-LMS, however only with values of $\rho=[0.001, 0.005]$ does it actually approach the upper limit,
+which is then being enforced by the algorithm itself. 
 
 
 
@@ -130,8 +133,8 @@ Letting this complete a 1000 runs, we produce a new expression for the estimate 
 squared error at each sample interval. This results in the following graph:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{graphs/LMS_mse.png}
-    \caption{The mean squared error of the LMS, with vary sizes of $\mu$}
+    \includegraphics[width=0.65\textwidth]{graphs/LMS_mse.png}
+    \caption{The mean squared error of the LMS, with varying sizes of $\mu$}
     \label{fig:LMS_EMS}
 \end{figure}
 
@@ -141,16 +144,54 @@ it seems smooth, however this averages over 1000 runs, this does not mean that t
 itself will be smooth, but over the averaged runs, it is. The reason for this type of result 
 is also the choice of input, where white gaussian noise is exhibits some fluctuations, when averaged
 over that many runs, it will average out smoothly. The curve also shows the filters
-ability, in this case to converge towards 0, meaning the filter has approximated the unidentified system.
+ability, in this case to converge towards 0, meaning the filter has approximated the unidentified system.\\
+
 
 %discuss calculating the maximum step size
+
+
+
+%discuss VVS LMS stability
+
+%discuss the weight shapes in VVS LMS vs regular LMS
+
+
+%discuss why the adaptation of step size, continues even after the weights have converged
+An interesting observation can made when comparing figure:\ref{fig:VVSLMS_1_adapt} and
+\ref{fig:VVSLMS_1_conv}. It can be seen that the weights of the filter have converged 
+relatively fast, however the step-size adaptation continues to grow, long after the weights.
+This is a phenomenon unique to the VSS-LMS. Taking a look at the equations for updating the
+weights $w_i[n+1]$: \ref{VSS_LMS_W} and 
+the $\mu$ update equation \ref{VSS_LMS_mu_update} from earlier. This particular implementation
+contains the function $sign(g_i[k])$ and $sign(g_i[k-1])$ this is used to estimate the gradient
+of the error, resulting in
+\begin{equation}
+    \Delta\mu_i[k] = 
+    \begin{cases}
+        +1 & \text{$g_i[k]$ and $g_i[k-1] \qquad same \ sign$} \\
+        -1 & \text{$g_i[k]$ and $g_i[k-1] \qquad opposite \ sign$} \\
+        0 & \text{Either gradient is zero}
+    \end{cases}
+    \label{eq:gradient_signs}
+\end{equation}
+The previous sample from $g_i[k]$, then could be a very small number, if an assumption is made that
+the filter weights have converged. Then only very small changes will make it into the $g_i[k]$ equation, 
+but since the $\mu$ update only cares about the sign, this will either add or subtract $\rho$ from $\mu$,
+however in the weight update equation, $\rho$ is just a factor with $e[n]x[n-1]$, which are very small numbers
+, thus the weight update will become even smaller. And this process repeats for every iteration. This leads to a situation
+where a adapted filter, will produce very small errors, but can accidentally start to integrate a large value of $\mu$, 
+much like a wind-up mechanism in control systems. However this is mainly due to the fact that the 
+input of the algorithm is being fed with gaussian noise. 
+
+%maybe make an error plot of one of VSS-LMS
 
 
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth
 
 
-%discuss VVS LMS stability
+
+
 
 
 
