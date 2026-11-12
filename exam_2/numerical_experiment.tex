@@ -74,9 +74,9 @@ any influence on either convergence speed and accuracy.
 The experiment with the variable step-size implementation, will be conducted 
 in a slightly similar manner, however, in the regular LMS, we are \textit{almost} free to 
 choose our values of $\mu$, however in the case for the variable step-size, some bounds are
-defined, as qouted [INDSÆT REFERENCE TIL BOGEN] \textit{"The minimum bound, which may be imposed on the variable
-step-size parameters $\mu_i(n)'s$, can be as low as zero. However in actual practice, a positive bound is usually used"}.
-Therefore stability is ensured if $trace(\mathbf{\mu}[n]\mathbf{R}) < \frac{1}{3}$. Which is the linear sum 
+defined, as qouted: \textit{"The minimum bound, which may be imposed on the variable
+step-size parameters $\mu_i(n)'s$, can be as low as zero. However in actual practice, a positive bound is usually used"}.\cite[P179]{ASPbook}
+Therefore stability is ensured if $trace(\mathbf{\mu}[n]\mathbf{R}) < \frac{1}{3}$. (equation 6.141)\cite[P179]{ASPbook} Which is the linear sum 
 of the diagonal of the autocorrelation matrix and $\mu$ vector:
 \[\mu_0[k] R_{00} + \mu_1[k] R_{11} + \dots + \mu_{M-1}[k] R_{M-1, M-1} < \frac{1}{3}\]
 For white noise the autocorrelation matrix is: 
@@ -91,7 +91,7 @@ This can rearranged:
 Since we already established the variance for the noise:
 \[\mu_{max} < \frac{1}{3M}\]
 And as already mentioned, in this case $M=3$, leads To
-\[\mu_{max} = \frac{1}{3\cdot3} = \frac{1}{9} = 0.1111\]
+\[\mu_{max} = \frac{1}{3\cdot3} = \frac{1}{9} \approx 0.1111\]
 \\
 Instead changes to $\rho$ can be applied, thus our test cases will be varying values of this factor in small increments
 of 0.0001, 0.001 and 0.005.
@@ -163,3 +163,12 @@ of 0.0001, 0.001 and 0.005.
     \caption{Results for running VVS LMS with 2000 samples}
     \label{fig:VVSLMS_3_results}
 \end{figure}
+
+\subsection{LMS vs variable step-size LMS in system changes}
+As another experiment, it will be shown how to two algorithms handle a sudden system change.
+Here the unidentified system will change from $d[k] = 0.5x[k] + 0.25[k-1] - 0.3[k-2]$
+to $d[k] = 0.8x[k] - 0.1[k-1] - 0.5[k-2]$. The point here is to see how fast the weights change 
+and in case of the variable step-size, how the steps adapt to the sudden change.
+The signal will remain the same, however after 2000 samples, it will suddenly change to the new
+system and last for another 2000 samples. The tests are conducted with the same changes in $\mu$ 
+and $\rho$ as mentioned in the other two tests.

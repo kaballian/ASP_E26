@@ -230,6 +230,75 @@ or rather, $\rho$ how hard, the algorithm react to the step size, the filter act
 also expected to be able to converge with these settings, as the filter itself is $M=3$ and the
 unidentified system is also has 3 coefficients.\\
 
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_1_system_shift.png}
+        \caption{weights of LMS filter for system change experiment}
+        \label{fig:EX3_LMS_weights}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Row 1 - rho = 0.0001
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift.png}
+        \caption{VSS LMS weights, $\rho=0.0001$}
+        \label{fig:EX3_VSS_LMS_weights_1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift_steps.png}
+        \caption{Step adaptation, $\rho=0.0001$}
+        \label{fig:EX2_VSS_LMS_adapt_1}
+    \end{subfigure}
+
+    \vspace{0.3cm}
+
+    % Row 2 - rho = 0.001
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift_2.png}
+        \caption{VSS LMS weights, $\rho=0.001$}
+        \label{fig:EX3_VSS_LMS_weights_2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift_2_steps.png}
+        \caption{Step adaptation, $\rho=0.001$}
+        \label{fig:EX2_VSS_LMS_adapt_2}
+    \end{subfigure}
+
+    \vspace{0.3cm}
+
+    % Row 3 - rho = 0.005
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift_3.png}
+        \caption{VSS LMS weights, $\rho=0.005$}
+        \label{fig:EX3_VSS_LMS_weights_3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/lms_experiment_2_system_shift_3_steps.png}
+        \caption{Step adaptation, $\rho=0.005$}
+        \label{fig:EX2_VSS_LMS_adapt_3}
+    \end{subfigure}
+
+    \caption{System change experiment for different values of $\rho$}
+    \label{fig:EX3}
+\end{figure}
+
+Graphs shown on figure \ref{fig:EX3_LMS_weights} and all of the above figures, shows the results
+of the system test. It can be see that they all adapt, however the LMS, when $\mu$ is small
+hasn't settled for the earlier system, thus it continues to adapt, however the other two values, 
+does converge. As for the variable step-size algorithm. Here they all converge, and they do it
+quite a lot faster than initially, this can be related to that the weights and the step-sizes
+already has grown larger from the first system, thus they allow larger changes to the weights.
+
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth
 On a practical note, implementing these algorithms on cheap hardware such as microcontrollers

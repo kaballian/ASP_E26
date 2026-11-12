@@ -2,8 +2,8 @@
 With the shown simulations of the both types of LMS algorithms, it easy to see how
 strongly the output of the filter is affected by $\mu$ and $\rho$ as the step factors. 
 Where a larger factor, in the case of the regular LMS, will result in a faster convergence, but
-at the risk over a slight overshoot and a possible susceptability to sudden changes, whereas
-small values will do the opposite, increase the time to convergence, in these tests, in the regular 
+at the risk over a slight overshoot and a possible susceptability to sudden changes. Whereas
+small values will do the opposite, increase the time to convergence. In these tests, in the regular 
 LMS, the increase was a factor of 10 each time, which showed that it had a larger impact, whereas 
 having more filter tabs did not really impact the system, however as it is coefficients to calculates
 it would inevitably have a price on computational speed.\\
@@ -14,4 +14,10 @@ having enough would lead to the inability to represent the actual system, thus r
 
 As for the variable step-size algorithm, it was possible to see how increasing the value of $\rho$ also
 improved on the mean square error of signal, but at the cost of having the both slight overshoot
-on the weights, which can seen on \ref{fig:VVSLMS_3_conv}
+on the weights, which can seen on figure: \ref{fig:VVSLMS_3_conv} and in the same simulation, the
+step size adaptation also shows a somewhat rapid and fast changing values. interestingly, 
+the variable step-size algorithm also worker quite well with the sudden system change, where the filter
+converged to the new system quite fast. Another experiment should probably be an unidentified system
+with more coefficients, to see how they both would have acted.
+
+
