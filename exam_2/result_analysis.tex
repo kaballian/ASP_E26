@@ -153,7 +153,6 @@ ability, in this case to converge towards 0, meaning the filter has approximated
 
 %discuss VVS LMS stability
 
-%discuss the weight shapes in VVS LMS vs regular LMS
 
 
 %discuss why the adaptation of step size, continues even after the weights have converged
@@ -161,7 +160,7 @@ An interesting observation can made when comparing figure:\ref{fig:VVSLMS_1_adap
 \ref{fig:VVSLMS_1_conv}. It can be seen that the weights of the filter have converged 
 relatively fast, however the step-size adaptation continues to grow, long after the weights.
 This is a phenomenon unique to the VSS-LMS. Taking a look at the equations for updating the
-weights $w_i[n+1]$: \ref{VSS_LMS_W} and 
+weights $w_i[k+1]$: \ref{VSS_LMS_W} and 
 the $\mu$ update equation \ref{VSS_LMS_mu_update} from earlier. This particular implementation
 contains the function $sign(g_i[k])$ and $sign(g_i[k-1])$ this is used to estimate the gradient
 of the error, resulting in
@@ -177,14 +176,59 @@ of the error, resulting in
 The previous sample from $g_i[k]$, then could be a very small number, if an assumption is made that
 the filter weights have converged. Then only very small changes will make it into the $g_i[k]$ equation, 
 but since the $\mu$ update only cares about the sign, this will either add or subtract $\rho$ from $\mu$,
-however in the weight update equation, $\rho$ is just a factor with $e[n]x[n-1]$, which are very small numbers
+however in the weight update equation, $\rho$ is just a factor with $e[k]x[k-1]$, which are very small numbers
 , thus the weight update will become even smaller. And this process repeats for every iteration. This leads to a situation
 where a adapted filter, will produce very small errors, but can accidentally start to integrate a large value of $\mu$, 
 much like a wind-up mechanism in control systems. However this is mainly due to the fact that the 
-input of the algorithm is being fed with gaussian noise. 
+input of the algorithm is being fed with gaussian noise.\\
+
+%discuss the weight shapes in VVS LMS vs regular LMS
+The shape of the weight curves are also interesting to look at, the shape of any of the normal LMS
+weight curves on figures: \ref{fig:LMS_M_3_W}, \ref{fig:LMS_M_5_W} and \ref{fig:LMS_M_10_W} compared
+to \ref{fig:VVSLMS_1_conv}, here it can be seen that regular LMS implementation has an almost
+exponential decay when converging, for this type of input signal, this also intuitively makes sense
+since $\mu$ is fixed, the weights increases with the magnitude of the error, so that large errors
+leads to large filter changes, and vice versa. 
+In terms of the variable step-size implementation, as already discussed, the running filter actively
+changes the step size, so the factor $\mu$ can increase, but the error introduced by $g[k]$ generally 
+decreases as the filter slowly converges and they gradually cancel each other out.\\
+
+
 
 %maybe make an error plot of one of VSS-LMS
+Lastly the mean square error of the variable step-size LMS:
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_1_MSE.png}
+        \caption{Mean square error of variable step-size with $\rho=0.0001$}
+        \label{fig:VSSLMS_MSE_1}
+    \end{subfigure}
+    \vspace{0.2cm}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_2_MSE.png}
+        \caption{Mean square error of variable step-size with $\rho=0.001$}
+        \label{fig:VSSLMS_MSE_2}
+    \end{subfigure}
+    \vspace{0.2cm}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{graphs/VVSLMS_experiment_3_MSE.png}
+        \caption{Mean square error of variable step-size with $\rho=0.005$}
+        \label{fig:VSSLMS_MSE_3}
+    \end{subfigure}
+    \caption{Mean square error of variable step-size LMS}
+    \label{fig:lms_MSE_resiæts}
+\end{figure}
 
+As can be seen on the figure: \ref{fig:VSSLMS_MSE_1}, \ref{fig:VSSLMS_MSE_2} amd
+\ref{fig:VSSLMS_MSE_3}. The mean square error of the variable step-size LMS, as expected 
+the mean square error approaches zero at the end of the samples, and with the increase in step size,
+or rather, $\rho$ how hard, the algorithm react to the step size, the filter acts faster. It is 
+also expected to be able to converge with these settings, as the filter itself is $M=3$ and the
+unidentified system is also has 3 coefficients.
 
 %discuess the difficulties of actual implementation on slower systems
 %resource usage, speed and bandwidth

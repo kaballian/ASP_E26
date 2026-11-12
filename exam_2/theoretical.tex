@@ -122,8 +122,9 @@ in filter performance for an LMS filter. It determines the speed of convergence 
 In the variable step-size algorithm each filter tab has an independent.
 It follows the form:
 \begin{equation}
-w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
-\qquad
+% w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
+w_o[k+1] = w_i[k] + 2\mu_i[k]g_i[k]
+,\qquad
 \textit{for} \qquad i = 0, 1, \dots, N-1
 \label{VSS_LMS_W}
 \end{equation}
@@ -131,12 +132,12 @@ w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i],
 The interesting part of this implementation is the gradient term, which
 is an intermediate calculation for the update of the $\mu$ value.
 \begin{equation}
-g_i[n] = e[n]x[n-i] \qquad  \qquad 
+g_i[k] = e[k]x[k-i] \qquad  \qquad 
 \label{VSS_LMS_g}
 \end{equation}
 \textit{and}
 \begin{equation}
-u_i[n] = u_i[n-1] + \rho sign \left[g_i[i]\right]sign\left[lg_i[n-1]\right]
+u_i[k] = u_i[k-1] + \rho sign \left[g_i[i]\right]sign\left[lg_i[k-1]\right]
 \label{VSS_LMS_mu_update}
 \end{equation}
 It is then up to the individual use case to determine a $\mu_{min}$ and $\mu_{max}$
