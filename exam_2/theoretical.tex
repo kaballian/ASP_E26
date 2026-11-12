@@ -3,6 +3,7 @@ Contrary to regular filtering, the designer targets a specific frequency or band
 placing zeroes and poles on the unit-circle to \textit{approximate}, a desired result, or 
 atleast get somewhat close to something acceptable.\\
 
+\subsection{LMS}
 In adaptive filtering, we're more concerned about the system as an input and how we implement
 an algorithm to force the error to be zero. In this lab journal the overall system we'll be examining
 will take the form of:
@@ -115,10 +116,17 @@ The vector $\mathbf{W}[k]$ hold the coefficients and the vector $\mathbf{X}[k]$ 
 \]
 
 The complete algorithm for computing the coefficiens for the vector:
-\[\mathbf{W}(k+1) = \mathbf{W}[k] + 2\mu e[k]\mathbf{x}[k]\]
+\[\mathbf{W}[k+1] = \mathbf{W}[k] + 2\mu e[k]\mathbf{x}[k]\]
 The factor $\mu$ is factor that gives some control of how aggressize the filter should act, as it a scalar
 that is multiplied onto the weights and the old samples. The idea of the algorithm is then, that each iteration
 that it runs, the weights of the filter are multipled with the signal, which affects how $y[k+1]$ samples will behave,
 this affects the error, and it repeats. Each iteration the weights gets updates aswell, so that they are
 applied with a different value at the next iteration. 
 
+
+\subsection{Variable Step-size LMS (VVS LMS)}
+As briefly mentioned in the LMS section, the factor $\mu$ is a deciding factor
+in filter performance for an LMS filter. It determines the speed of convergence and accuracy.
+In the variable step-size algorithm each filter tab has an independent.
+It follows the form:
+\[w_i[n+1] = w_i[n] + 2\mu_i[n]e[n]x[n-i]\]  

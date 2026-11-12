@@ -101,19 +101,41 @@ but larger values of $\mu$ also comes with some drawbacks that will be expanded 
 As alluded to in the LMS analysis section, larger values of $\mu$ is not necessary a good thing.
 If too a large is selected, the resulting product of the input and the error is essentailly gained
 by the value, if this value $\mu \le 1$ it is easy to see that, this will cause the resulting calculations
-to start spiralling out of control. In the simple example given ealier, an equation for the behaviour of the
-oscillations can be derived. 
-\[w[k+1] = w[k] + 2\mu e[k]x[k]\]
-In this case, the single tab, the desired signal can be described as: $d[k] = \alpha x[k] $ and 
-filter $y[k] = w[k]x[k]$ and the error $e[k] = d[k] - y[k]$ substituting $d[k]$ and $y[k]$:
-\[e[k]\Rightarrow \alpha x[k] - w[k] x[k] = (\alpha - w[k])x[k]\]
-Substituting this into the update equation yields:
-\[w[k+1] = w[k] +2\mu(\alpha - w[k])x^2[k]\]
-Manipulating the equation and in this case x[k] = 1:
-\[w[k+1] = w[k] + 2\mu\alpha - 2\mu w[k] \]
-\[w[k+1] = w[k] - 2\mu w[k] + 2\mu \alpha \]
-\[w[k+1] = (1-2\mu)w[k] + 2\mu\alpha\]
+to start spiralling out of control. An optimum value for $\mu$ can be derived, however as long as:
+\[0 < \mu < \frac{1}{\lambda_{max}}\]
+This is equation (6.17) from the adaptive filter book, [INDSÆT REFERENCE TIL BOGEN]
+"where the $\lambda_{max}$ is the maximum eigenvalue of $\mathbf{R}$", where $\mathbf{R}$ is the autocorrelation matrix.\\
+To observe how well the regular LMS performs in our experiments, we've taken a look at much $y[k]$ approches $d[k]$ which would
+result in the error converging to zero. This can be represented as the mean square error instead, and when
+this is done over multiple runs of the filter. (INDSÆT REFERENCE TO WIKI: MEAN\_SQUARED\_ERROR)
+\[MSE = \frac{1}{n}\sum_{i=1}^{n}e^2_i[k]\]
+Letting this run at, say a 1000 runs, we produce a new expression for the estimate of the expected 
+squared error at each sample interval. This results in the following graph:
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{graphs/LMS_mse.png}
+    \caption{The mean squared error of the LMS, with vary sizes of $\mu$}
+    \label{fig:LMS_EMS}
+\end{figure}
+% In the simple example given ealier, an equation for the behaviour of the
+% oscillations can be derived. 
+% \[w[k+1] = w[k] + 2\mu e[k]x[k]\]
+% In this case, the single tab, the desired signal can be described as: $d[k] = \alpha x[k] $ and 
+% filter $y[k] = w[k]x[k]$ and the error $e[k] = d[k] - y[k]$ substituting $d[k]$ and $y[k]$:
+% \[e[k]\Rightarrow \alpha x[k] - w[k] x[k] = (\alpha - w[k])x[k]\]
+% Substituting this into the update equation yields:
+% \[w[k+1] = w[k] +2\mu(\alpha - w[k])x^2[k]\]
+% Manipulating the equation and in this case x[k] = 1:
+% \[w[k+1] = w[k] + 2\mu\alpha - 2\mu w[k] \]
+% \[w[k+1] = w[k] - 2\mu w[k] + 2\mu \alpha \]
+% \[w[k+1] = (1-2\mu)w[k] + 2\mu\alpha\]
 
+On figure \ref{fig:LMS_EMS} it is possible to see the decreasing nature of the error,
+it seems smooth, however this averages over 1000 runs, this does not mean that the filter
+itself will be smooth, but over the averaged runs, it is. The reason for this type of result 
+is also the choice of input, where white gaussian noise is exhibits some fluctuations, when averaged
+over that many runs, it will average out smoothly. The curve also shows the filters
+ability, in this case to converge towards 0, meaning the filter has approximated the unidentified system.
 
 %discuss calculating the maximum step size
 
